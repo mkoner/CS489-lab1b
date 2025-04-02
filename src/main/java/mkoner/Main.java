@@ -54,7 +54,7 @@ public class Main {
 //                }
 //                return  Double.compare(b.getYearlySalary(), a.getYearlySalary());
 //            });
-        employees.sort(Comparator.comparing(Employee::getYearlySalary).reversed().thenComparing(Comparator.comparing(Employee::getLastName)));
+        employees.sort(Comparator.comparing(Employee::getYearlySalary).reversed().thenComparing(Employee::getLastName));
             System.out.println("All employees:");
             System.out.println(toJson(employees));
     }
