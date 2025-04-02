@@ -8,6 +8,7 @@ import mkoner.model.PensionPlan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -47,12 +48,13 @@ public class Main {
 
     public static void printAllEmployees(List<Employee> employees) {
 
-            employees.sort((a, b) ->{
-                if(a.getYearlySalary() == b.getYearlySalary()) {
-                    return String.CASE_INSENSITIVE_ORDER.compare(a.getLastName(), b.getLastName());
-                }
-                return  Double.compare(b.getYearlySalary(), a.getYearlySalary());
-            });
+//            employees.sort((a, b) ->{
+//                if(a.getYearlySalary() == b.getYearlySalary()) {
+//                    return String.CASE_INSENSITIVE_ORDER.compare(a.getLastName(), b.getLastName());
+//                }
+//                return  Double.compare(b.getYearlySalary(), a.getYearlySalary());
+//            });
+        employees.sort(Comparator.comparing(Employee::getYearlySalary).reversed().thenComparing(Comparator.comparing(Employee::getLastName)));
             System.out.println("All employees:");
             System.out.println(toJson(employees));
     }
@@ -64,6 +66,7 @@ public class Main {
                 upcomingEnrollees.add(employee);
             }
         }
+        upcomingEnrollees.sort(Comparator.comparing(Employee::getEmploymentDate).reversed());
         System.out.println(" Quarterly Upcoming Enrollees:");
         System.out.println(toJson(upcomingEnrollees));
     }
